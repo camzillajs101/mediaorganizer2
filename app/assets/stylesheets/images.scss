@@ -1,3 +1,44 @@
 // Place all the styles related to the Images controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+.new-image-form {
+  display: flex;
+  flex-flow: column wrap;
+  align-items: flex-start;
+  gap: 1em;
+
+  margin: 2em;
+
+  input[type="text"], textarea {
+    font-size: 0.9rem;
+    font-family: inherit;
+    padding: 0.5em;
+    width: 35ch;
+    border: 1px solid lightgray;
+
+    transition: border 250ms;
+
+    &:is(:hover, :focus) {
+      border: 1px solid gray;
+      outline: none;
+    }
+  }
+}
+
+.fullsize {
+  height: 100vh;
+  width: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.ahidden {
+  position: absolute;
+  top: 5px;
+  left: 8px;
+  color: black;
+}
+.ahidden:hover {
+  color: white;
+}

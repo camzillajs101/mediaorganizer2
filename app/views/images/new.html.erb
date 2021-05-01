@@ -1,9 +1,13 @@
 <h1>Add image</h1>
 
-<%= form_with model: @image do |f| %>
-  <div class="field"><%= f.text_field :url, placeholder: "URL" %></div>
+<%= form_with model: @image, class: "new-image-form" do |f| %>
+  <div class="field">
+    <%= f.text_field :url, placeholder: "URL" %>
+  </div>
 
-  <div class="field"><%= f.text_field :title, placeholder: "Title" %></div>
+  <div class="field">
+    <%= f.text_field :title, placeholder: "Title" %>
+  </div>
 
   <div class="field">
     <%= f.label :desc, "Comments (optional)" %><br>
@@ -22,7 +26,6 @@
 
   <div class="field">
     <h3>Categories</h3>
-    <%= f.label :tag_list, "Tags" %><br>
     <%= f.text_area :tag_list %>
   </div>
 
