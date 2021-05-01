@@ -22,11 +22,11 @@
 
   <div class="field">
     <h3>Categories</h3>
-    <%= f.label :tag_list, "Tags" %>
-    <%= f.textarea :tag_list %>
+    <%= f.label :tag_list, "Tags" %><br>
+    <%= f.text_area :tag_list %>
   </div>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Add image" %>
   </div>
 <% end %>

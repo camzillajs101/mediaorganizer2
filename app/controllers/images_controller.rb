@@ -1,6 +1,8 @@
 class ImagesController < ApplicationController
+  before_action :authenticate_user!
+
   def index
-    @images = Image.all
+    @images = current_user.images
   end
 
   def show
@@ -8,8 +10,24 @@ class ImagesController < ApplicationController
   end
 
   def new
+    @image = current_user.images.new
+  end
+
+  def create
+    @image = current_user.images.new(image_params)
+
+    if @image.save
+      redirect_to @image
+    else
+      render :new
+    end
   end
 
   def edit
   end
+
+  private
+    def image_params
+      params.require(:image).permit(:title, :url, :desc, :mediatype, :favorite, :tag_list)
+    end
 end

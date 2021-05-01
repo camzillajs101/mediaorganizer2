@@ -1,2 +1,10 @@
-<h1>Images#show</h1>
-<p>Find me in app/views/images/show.html.erb</p>
+<body style="background-color:#0e0e0e;padding:0;margin:0;">
+  <%= link_to "edit", edit_image_path(@image.id), class: "ahidden" %>
+  <% if @image.mediatype == "image" %>
+    <%= link_to image_tag(@image.url, class: "fullsize"), @image.url %>
+  <% elsif @image.mediatype == "video" %>
+    <%= link_to video_tag(@image.url, controls: true, class: "fullsize"), @image.url %>
+  <% elsif @image.mediatype == "link" %>
+    <%= link_to @image.url %>
+  <% end %>
+</body>
