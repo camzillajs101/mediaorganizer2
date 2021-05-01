@@ -42,3 +42,17 @@
 .ahidden:hover {
   color: white;
 }
+
+.images-index {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 1em;
+
+  margin: 2em 2%;
+
+  img {
+    width: clamp(200px, 18vw, 600px);
+    height: clamp(200px, 18vw, 600px);
+    object-fit: cover;
+  }
+}
