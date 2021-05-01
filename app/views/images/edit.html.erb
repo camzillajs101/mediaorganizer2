@@ -1,2 +1,37 @@
-<h1>Images#edit</h1>
-<p>Find me in app/views/images/edit.html.erb</p>
+<%= link_to "All images", images_path %>
+
+<h1><%= @image.title %></h1>
+
+<%= form_with model: @image, class: "new-image-form" do |f| %>
+  <div class="field">
+    <%= f.text_field :url, placeholder: "URL" %>
+  </div>
+
+  <div class="field">
+    <%= f.text_field :title, placeholder: "Title" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :desc, "Comments (optional)" %><br>
+    <%= f.text_area :desc, placeholder: "Any additional comments about this image" %>
+  </div>
+
+  <div class="field">
+    <%= f.check_box :favorite %>
+    <%= f.label :favorite, "Favorite?" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :mediatype, "Media type" %><br>
+    <%= f.select(:mediatype, [['image','image'],['video','video'],['link','link']]) %><br>
+  </div>
+
+  <div class="field">
+    <h3>Categories</h3>
+    <%= f.text_area :tag_list %>
+  </div>
+
+  <%= f.submit "Update image" %>
+
+  <%= link_to "Delete image", image_path(@image.id), method: :delete, data: { confirm: "Are you sure?" } %>
+<% end %>

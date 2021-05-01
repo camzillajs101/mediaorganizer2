@@ -1,5 +1,10 @@
 <h1>Here are all your images lol</h1>
 
+<%= form_with url: "/images/upload", multipart: true do |f| %>
+  <%= f.file_field :file %><br>
+  <%= f.submit "Upload CSV" %>
+<% end %>
+
 <%= link_to "Add image", new_image_path %><br><br>
 
 <%= form_tag images_path, method: :get do %>
@@ -14,9 +19,15 @@
 <% end %>
 
 <div class="images-index">
-  <% @images.each do |image| %>
+  <% @photos.each do |photo| %>
     <div>
-      <%= link_to image_tag(image.url), image %>
+      <%= link_to image_tag(photo.url), photo %>
     </div>
+  <% end %>
+  <% @videos.each do |video| %>
+
+  <% end %>
+  <% @links.each do |link| %>
+
   <% end %>
 </div>

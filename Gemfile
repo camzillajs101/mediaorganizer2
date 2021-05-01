@@ -60,3 +60,6 @@ gem 'devise'
 
 # AATO
 gem 'acts-as-taggable-on', '~> 7.0'
+
+# CSV
+gem 'csv'
