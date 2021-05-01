@@ -1,6 +1,17 @@
 <h1>Here are all your images lol</h1>
 
-<%= link_to "Add image", new_image_path %>
+<%= link_to "Add image", new_image_path %><br><br>
+
+<%= form_tag images_path, method: :get do %>
+  <%= label_tag :query, "Search for:" %>
+  <%= text_field_tag :query %>
+  <%= submit_tag "Search" %>
+<% end %>
+
+<% if @query %>
+  <h3>Displaying images with tag(s): <%= @query %></h3>
+  <%= link_to "Show all", images_path %>
+<% end %>
 
 <div class="images-index">
   <% @images.each do |image| %>

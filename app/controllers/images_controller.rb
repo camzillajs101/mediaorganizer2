@@ -3,6 +3,17 @@ class ImagesController < ApplicationController
 
   def index
     @images = current_user.images
+    @query = params[:query]
+
+    if @query
+      if @query.include? "favorite"
+        @images = @images.where(favorite: true)
+        @query.slice! "favorite"
+      end
+      if @query != ""
+        @images = @images.tagged_with(@query)
+      end
+    end
   end
 
   def show
