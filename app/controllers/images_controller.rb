@@ -1,13 +1,15 @@
 class ImagesController < ApplicationController
-  def show
-  end
-
   def index
+    @images = Image.all
   end
 
-  def edit
+  def show
+    @image = Image.find(params[:id])
   end
 
   def new
+  end
+
+  def edit
   end
 end

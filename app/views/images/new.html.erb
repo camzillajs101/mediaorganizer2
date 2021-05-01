@@ -1,2 +1,32 @@
-<h1>Images#new</h1>
-<p>Find me in app/views/images/new.html.erb</p>
+<h1>Add image</h1>
+
+<%= form_with model: @image do |f| %>
+  <div class="field"><%= f.text_field :url, placeholder: "URL" %></div>
+
+  <div class="field"><%= f.text_field :title, placeholder: "Title" %></div>
+
+  <div class="field">
+    <%= f.label :desc, "Comments (optional)" %><br>
+    <%= f.text_area :desc, placeholder: "Any additional comments about this image" %>
+  </div>
+
+  <div class="field">
+    <%= f.check_box :favorite %>
+    <%= f.label :favorite, "Favorite?" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :mediatype, "Media type" %><br>
+    <%= f.select(:mediatype, [['image','image'],['video','video'],['link','link']]) %><br>
+  </div>
+
+  <div class="field">
+    <h3>Categories</h3>
+    <%= f.label :tag_list, "Tags" %>
+    <%= f.textarea :tag_list %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
