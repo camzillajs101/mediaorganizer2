@@ -1,0 +1,14 @@
+<h1>All Tags</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Number of images</th>
+  </tr>
+  <% @tags.each do |tag| %>
+    <tr>
+      <td><%= tag.name %></td>
+      <td><%= tag.taggings_count %></td>
+    </tr>
+  <% end %>
+</table>

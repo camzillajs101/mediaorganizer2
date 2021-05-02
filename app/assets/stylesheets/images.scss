@@ -59,9 +59,29 @@
 }
 .other-index {
   display: flex;
-  flex-flow: row nowrap;
+  flex-flow: row wrap;
 
   > * {
     flex: 50%;
+    min-width: 300px;
+  }
+}
+
+.image-wrapper {
+  position: relative;
+
+  .edit-image-link {
+    display: none;
+    color: black;
+    background-color: white;
+
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    padding: 0.2em 0.5em;
+  }
+
+  &:hover .edit-image-link {
+    display: block;
   }
 }

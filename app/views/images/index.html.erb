@@ -28,7 +28,10 @@
 <div class="images-index">
   <% if @photos.any? %>
     <% @photos.each do |photo| %>
-      <%= link_to image_tag(photo.url), photo %>
+      <div class="image-wrapper" id="image-wrapper-<%= photo.id %>">
+        <%= link_to image_tag(photo.url), photo %>
+        <%= link_to "edit", edit_image_path(photo.id), class: "edit-image-link" %>
+      </div>
     <% end %>
   <% end %>
 </div>
@@ -40,7 +43,7 @@
         <details>
           <summary><%= video.title %></summary>
           <%= link_to video_tag(video.url, controls: true, preload: 'none'), video %>
-        </details><br>
+        </details>
       <% end %>
     <% end %>
   </div>
