@@ -1,5 +1,12 @@
 <h1>Here are all your images lol</h1>
 
+<%= @images.size %> total:
+<ul>
+  <li><%= pluralize(@photos.size, 'photo') %></li>
+  <li><%= pluralize(@videos.size, 'video') %></li>
+  <li><%= pluralize(@links.size, 'link') %></li>
+</ul>
+
 <%= form_with url: "/images/upload", multipart: true do |f| %>
   <%= f.file_field :file %><br>
   <%= f.submit "Upload CSV" %>
