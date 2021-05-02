@@ -46,7 +46,7 @@ class ImagesController < ApplicationController
     @image = Image.find(params[:id])
 
     if @image.update(image_params)
-      redirect_to edit_image_path(params[:id].to_i + 1)
+      redirect_to images_path # edit_image_path(params[:id].to_i + 1)
     else
       render :edit
     end
@@ -57,7 +57,7 @@ class ImagesController < ApplicationController
     table = CSV.parse(uploaded_file.read)
 
     table.each do |row|
-      if row[1] = "url" return
+      return if row[1] = "url"
       if Image.where(url: row[1]).empty?
         image = current_user.images.new(url: row[1], title: row[2], favorite: row[3], mediatype: row[6])
         image.save

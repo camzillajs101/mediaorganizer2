@@ -56,3 +56,11 @@
     object-fit: cover;
   }
 }
+.other-index {
+  display: flex;
+  flex-flow: row nowrap;
+
+  > * {
+    flex: 50%;
+  }
+}

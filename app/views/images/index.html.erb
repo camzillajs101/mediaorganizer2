@@ -19,15 +19,29 @@
 <% end %>
 
 <div class="images-index">
-  <% @photos.each do |photo| %>
-    <div>
+  <% if @photos.any? %>
+    <% @photos.each do |photo| %>
       <%= link_to image_tag(photo.url), photo %>
-    </div>
+    <% end %>
   <% end %>
-  <% @videos.each do |video| %>
+</div>
 
-  <% end %>
-  <% @links.each do |link| %>
-
-  <% end %>
+<div class="other-index">
+  <div class="videos-index">
+    <% if @videos.any? %>
+      <% @videos.each do |video| %>
+        <details>
+          <summary><%= video.title %></summary>
+          <%= link_to video_tag(video.url, controls: true, preload: 'none'), video %>
+        </details><br>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="links-index">
+    <% if @links.any? %>
+      <% @links.each do |link| %>
+        <%= link_to link.title, link.url, target: "_blank" %> (<%= link_to "edit", edit_image_path(link.id) %>)<br>
+      <% end %>
+    <% end %>
+  </div>
 </div>
