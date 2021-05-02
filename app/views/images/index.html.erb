@@ -14,14 +14,15 @@
 
 <%= link_to "Add image", new_image_path %><br><br>
 
-<%= form_tag images_path, method: :get do %>
-  <%= label_tag :query, "Search for:" %>
-  <%= text_field_tag :query %>
-  <%= submit_tag "Search" %>
+<%= form_with url: images_path, method: :get do |f| %>
+  <%= f.label :query, "Search for:" %>
+  <%= f.text_field :query %>
+  <%= f.submit "Search" %>
+  <%= f.select(:qtype, ['any','exact','exclude']) %>
 <% end %>
 
-<% if @query %>
-  <h3>Displaying images with tag(s): <%= @query %></h3>
+<% if params[:query] %>
+  <h3>Displaying images with tag(s): <%= params[:query] %></h3>
   <%= link_to "Show all", images_path %>
 <% end %>
 

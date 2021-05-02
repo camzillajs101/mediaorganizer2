@@ -6,14 +6,27 @@ class ImagesController < ApplicationController
     @query = params[:query]
 
     if @query
-      if @query.include? "favorite"
-        @images = @images.where(favorite: true)
-        @query.slice! "favorite"
-      end
-      if @query != ""
+      case params[:qtype]
+      when "any"
+        @images = @images.tagged_with(@query, :any => true)
+      when "exact"
+        @images = @images.tagged_with(@query, :match_all => true)
+      when "exclude"
+        @images = @images.tagged_with(@query, :exclude => true)
+      else
         @images = @images.tagged_with(@query)
       end
     end
+
+    # if @query
+    #   if @query.include? "favorite"
+    #     @images = @images.where(favorite: true)
+    #     @query.slice! "favorite"
+    #   end
+    #   if @query != ""
+    #     @images = @images.tagged_with(@query)
+    #   end
+    # end
 
     @photos = @images.where(mediatype: "image")
     @videos = @images.where(mediatype: "video")
@@ -30,6 +43,7 @@ class ImagesController < ApplicationController
 
   def create
     @image = current_user.images.new(image_params)
+    @image.tag_list.add("favorite") if @image.favorite
 
     if @image.save
       redirect_to @image
@@ -45,7 +59,14 @@ class ImagesController < ApplicationController
   def update
     @image = Image.find(params[:id])
 
+
     if @image.update(image_params)
+      if @image.favorite
+        @image.tag_list.add("favorite")
+      else
+        @image.tag_list.remove("favorite")
+      end
+      @image.save
       redirect_to images_path # edit_image_path(params[:id].to_i + 1)
     else
       render :edit
