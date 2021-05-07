@@ -1,6 +1,6 @@
 class ImagesController < ApplicationController
   before_action :authenticate_user!
-  before_action :verify_ownership, except: :index
+  before_action :verify_ownership, except: [:index, :upload]
 
   def index
     @images = current_user.images.order(id: :asc)
