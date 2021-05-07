@@ -78,8 +78,9 @@ class ImagesController < ApplicationController
     table = CSV.parse(uploaded_file.read)
 
     table.each do |row|
-      return if row[0] == "id" # header row
-      if Image.where(url: row[1]).empty?
+      next if row[0] == "id" # header row
+
+      if !Image.where(url: row[1]).exists?
         image = current_user.images.new(url: row[1], title: row[2], favorite: row[3], mediatype: row[6])
         image.save
       end
