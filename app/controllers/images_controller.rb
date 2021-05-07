@@ -1,5 +1,6 @@
 class ImagesController < ApplicationController
   before_action :authenticate_user!
+  before_action :verify_ownership, except: :index
 
   def index
     @images = current_user.images.order(id: :asc)
@@ -73,6 +74,13 @@ class ImagesController < ApplicationController
     end
   end
 
+  def destroy
+    @image = Image.find(params[:id])
+    @image.destroy
+
+    redirect_to images_path
+  end
+
   def upload
     uploaded_file = params[:file]
     table = CSV.parse(uploaded_file.read)
@@ -81,7 +89,7 @@ class ImagesController < ApplicationController
       next if row[0] == "id" # header row
 
       if !Image.where(url: row[1]).exists?
-        image = current_user.images.new(url: row[1], title: row[2], favorite: row[3], mediatype: row[6])
+        image = current_user.images.new(url: row[1], title: row[2], desc: row[3], favorite: row[4], mediatype: row[8])
         image.save
       end
     end
@@ -92,5 +100,10 @@ class ImagesController < ApplicationController
   private
     def image_params
       params.require(:image).permit(:title, :url, :desc, :mediatype, :favorite, :tag_list)
+    end
+    def verify_ownership
+      if Image.find(params[:id]).user_id != current_user.id
+        redirect_to images_path
+      end
     end
 end
