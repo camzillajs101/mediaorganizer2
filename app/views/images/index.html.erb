@@ -7,10 +7,7 @@
   <li><%= pluralize(@links.size, 'link') %></li>
 </ul>
 
-<%= form_with url: "/images/upload", multipart: true do |f| %>
-  <%= f.file_field :file %><br>
-  <%= f.submit "Upload CSV" %>
-<% end %>
+<%= link_to "Upload CSV data", "/upload" %><br><br>
 
 <%= link_to "Add image", new_image_path %><br><br>
 

@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :images
   root 'images#index'
 
-  post '/images/upload', to: "images#upload"
+  get '/upload', to: "images#fileupload"
+  post '/upload', to: "images#upload"
   get '/tags', to: "tags#index"
 end

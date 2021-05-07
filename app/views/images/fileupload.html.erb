@@ -1,0 +1,14 @@
+<h1>Upload CSV data</h1>
+
+<%= form_with url: "/upload", multipart: true do |f| %>
+  <%= f.label :images %>
+  <%= f.file_field :images %><br>
+
+  <%= f.label :tags %>
+  <%= f.file_field :tags %><br>
+
+  <%= f.label :taggings %>
+  <%= f.file_field :taggings %><br>
+  <br>
+  <%= f.submit "Upload CSV" %>
+<% end %>

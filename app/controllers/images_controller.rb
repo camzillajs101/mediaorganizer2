@@ -1,6 +1,6 @@
 class ImagesController < ApplicationController
   before_action :authenticate_user!
-  before_action :verify_ownership, except: [:index, :upload]
+  before_action :verify_ownership, except: [:index, :upload, :fileupload]
 
   def index
     @images = current_user.images.order(id: :asc)
@@ -18,16 +18,6 @@ class ImagesController < ApplicationController
         @images = @images.tagged_with(@query)
       end
     end
-
-    # if @query
-    #   if @query.include? "favorite"
-    #     @images = @images.where(favorite: true)
-    #     @query.slice! "favorite"
-    #   end
-    #   if @query != ""
-    #     @images = @images.tagged_with(@query)
-    #   end
-    # end
 
     @photos = @images.where(mediatype: "image")
     @videos = @images.where(mediatype: "video")
@@ -81,16 +71,36 @@ class ImagesController < ApplicationController
     redirect_to images_path
   end
 
+  def fileupload
+
+  end
+
   def upload
-    uploaded_file = params[:file]
-    table = CSV.parse(uploaded_file.read)
+    if params[:images]
+      uploaded_file = params[:images]
+      table = CSV.parse(uploaded_file.read)
 
-    table.each do |row|
-      next if row[0] == "id" # header row
+      table.each do |row|
+        next if row[0] == "id" # header row
 
-      if !Image.where(url: row[1]).exists?
-        image = current_user.images.new(url: row[1], title: row[2], desc: row[3], favorite: row[4], mediatype: row[8])
-        image.save
+        if !Image.where(url: row[1]).exists?
+          image = current_user.images.new(url: row[1], title: row[2], desc: row[3], favorite: row[4], mediatype: row[8])
+          image.save
+        end
+      end
+    end
+
+    if params[:tags] && params[:taggings]
+      tags = CSV.parse(params[:tags].read)
+      taggings = CSV.parse(params[:taggings].read)
+
+      taggings.each do |row|
+        next if row[0] == "id" # header row
+
+        tag_name = tags[row[1]][1] # get name column of tag record with id equal to tag_id (DANGEROUS: assumes tags are in order by id)
+        tagged = Image.find(row[3])
+        tagged.tag_list.add(tag_name)
+        tagged.save
       end
     end
 
