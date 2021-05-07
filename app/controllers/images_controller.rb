@@ -97,7 +97,7 @@ class ImagesController < ApplicationController
       taggings.each do |row|
         next if row[0] == "id" # header row
 
-        tag_name = tags[row[1]][1] # get name column of tag record with id equal to tag_id (DANGEROUS: assumes tags are in order by id)
+        tag_name = tags[row[1].to_i][1] # get name column of tag record with id equal to tag_id (DANGEROUS: assumes tags are in order by id)
         tagged = Image.find(row[3])
         tagged.tag_list.add(tag_name)
         tagged.save
