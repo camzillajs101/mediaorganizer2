@@ -4,18 +4,23 @@ class ImagesController < ApplicationController
 
   def index
     @images = current_user.images.order(id: :asc)
-    @query = params[:query]
+    @title_query = params[:title_query]
+    @tag_query = params[:tag_query]
 
-    if @query
+    if @title_query && @title_query != ""
+      @images = @images.where("title LIKE ?", "%#{@title_query}%")
+    end
+
+    if @tag_query && @tag_query != ""
       case params[:qtype]
       when "any"
-        @images = @images.tagged_with(@query, :any => true)
+        @images = @images.tagged_with(@tag_query, :any => true)
       when "exact"
-        @images = @images.tagged_with(@query, :match_all => true)
+        @images = @images.tagged_with(@tag_query, :match_all => true)
       when "exclude"
-        @images = @images.tagged_with(@query, :exclude => true)
+        @images = @images.tagged_with(@tag_query, :exclude => true)
       else
-        @images = @images.tagged_with(@query)
+        @images = @images.tagged_with(@tag_query)
       end
     end
 

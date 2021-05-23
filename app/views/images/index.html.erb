@@ -12,14 +12,23 @@
 <%= link_to "Add image", new_image_path %><br><br>
 
 <%= form_with url: images_path, method: :get do |f| %>
-  <%= f.label :query, "Search for:" %>
-  <%= f.text_field :query %>
+  <%= f.label :tag_query, "Search by tag(s):" %>
+  <%= f.text_field :tag_query %>
+  <%= f.select(:qtype, ['any','exact','exclude']) %><br>
+
+  <%= f.label :title_query, "Search by title:" %>
+  <%= f.text_field :title_query %><br>
+
   <%= f.submit "Search" %>
-  <%= f.select(:qtype, ['any','exact','exclude']) %>
 <% end %>
 
-<% if params[:query] %>
-  <h3>Displaying images with tag(s): <%= params[:query] %></h3>
+<% if @tag_query && @tag_query != "" %>
+  <h3>Displaying images with tag(s): <%= params[:tag_query] %></h3>
+<% end %>
+<% if @title_query && @title_query != "" %>
+  <h3>Displaying images with title containing: <%= params[:title_query] %></h3>
+<% end %>
+<% if @tag_query || @title_query %>
   <%= link_to "Show all", images_path %>
 <% end %>
 
@@ -27,7 +36,7 @@
   <% if @photos.any? %>
     <% @photos.each do |photo| %>
       <div class="image-wrapper" id="image-wrapper-<%= photo.id %>">
-        <%= link_to image_tag(photo.url), photo %>
+        <%= link_to image_tag(photo.url), photo, title: photo.title %>
         <%= link_to "edit", edit_image_path(photo.id), class: "edit-image-link" %>
       </div>
     <% end %>
