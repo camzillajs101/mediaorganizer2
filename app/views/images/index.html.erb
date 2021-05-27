@@ -37,7 +37,6 @@
     <% @photos.each do |photo| %>
       <div class="image-wrapper" id="image-wrapper-<%= photo.id %>">
         <%= link_to image_tag(photo.url), photo, title: photo.title %>
-        <%= link_to "edit", edit_image_path(photo.id), class: "edit-image-link" %>
       </div>
     <% end %>
   <% end %>
@@ -49,7 +48,7 @@
       <% @videos.each do |video| %>
         <details>
           <summary><%= video.title %></summary>
-          <%= link_to video_tag(video.url, controls: true, preload: 'none'), video %>
+          <%= video_tag(video.url, controls: true, preload: 'none') %>
         </details>
       <% end %>
     <% end %>
