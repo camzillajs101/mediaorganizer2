@@ -33,6 +33,10 @@ class ImagesController < ApplicationController
     @image = Image.find(params[:id])
   end
 
+  def play # just for videos
+    @video = Image.find(params[:id])
+  end
+
   def new
     @image = current_user.images.new
   end

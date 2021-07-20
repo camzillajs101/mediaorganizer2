@@ -55,19 +55,53 @@
     width: clamp(300px, 18vw, 600px);
     height: clamp(300px, 18vw, 600px);
     object-fit: cover;
+    transition: transform ease-out 200ms;
+
+    &:is(:hover, :focus) {
+      transform: scale(1.05); // kills performance lol
+    }
   }
 }
-.other-index {
+
+.videos-container {
   display: flex;
   flex-flow: row wrap;
+}
+.videos-index {
+  margin: 0 auto;
+  flex: 0 1 40%;
+  height: 400px;
+  overflow-y: scroll;
 
-  > * {
-    flex: 50%;
-    min-width: 300px;
+  a {
+    display: block;
+    width: 100%;
+    padding: 0.2em 0.5em;
+    color: black;
+    background-color: white;
+    transition: background-color 100ms;
+
+    &:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+    &:is(:hover, :focus) {
+      color: black;
+      background-color: #e0e0e0;
+    }
   }
+}
+.video-player {
+  margin: 0 auto 2em;
+  height: 400px;
+  aspect-ratio: 16 / 9;
+  border: 1px solid white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   video {
-    max-height: 40vh;
+    max-height: 100%;
+    width: 100%;
   }
 }
 

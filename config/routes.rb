@@ -8,4 +8,5 @@ Rails.application.routes.draw do
   get '/upload', to: "images#fileupload"
   post '/upload', to: "images#upload"
   get '/tags', to: "tags#index"
+  get '/play/:id', to: "images#play"
 end

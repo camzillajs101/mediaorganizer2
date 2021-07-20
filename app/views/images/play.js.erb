@@ -1,0 +1,5 @@
+$('.video-player').html('<video src="<%= @video.url %>" controls autoplay>');
+
+$('.clear-player-btn').click(() => {
+  $('.video-player').html("Select a video on the left!");
+})

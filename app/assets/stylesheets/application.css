@@ -18,6 +18,10 @@
   font-family: Arial;
 }
 
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
 /* dark mode */
 body {
   background-color: #202020;

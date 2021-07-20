@@ -37,28 +37,29 @@
   <% if @photos.any? %>
     <% @photos.each do |photo| %>
       <div class="image-wrapper" id="image-wrapper-<%= photo.id %>">
-        <%= link_to image_tag(photo.url), photo, title: photo.title %>
+        <%= link_to image_tag(photo.url, title: photo.title), photo %>
       </div>
     <% end %>
   <% end %>
 </div>
 
-<div class="other-index">
+<div class="videos-container">
   <div class="videos-index">
     <% if @videos.any? %>
       <% @videos.each do |video| %>
-        <details>
-          <summary><%= video.title %></summary>
-          <%= video_tag(video.url, controls: true, preload: 'none') %>
-        </details>
+        <%= link_to video.title, "/play/#{video.id}", remote: true %>
       <% end %>
     <% end %>
   </div>
-  <div class="links-index">
-    <% if @links.any? %>
-      <% @links.each do |link| %>
-        <%= link_to link.title, link.url, target: "_blank" %> (<%= link_to "edit", edit_image_path(link.id) %>)<br>
-      <% end %>
-    <% end %>
+  <div class="video-player">
+    Select a video on the left!
   </div>
+</div>
+
+<div class="links-index">
+  <% if @links.any? %>
+    <% @links.each do |link| %>
+      <%= link_to link.title, link.url, target: "_blank" %> (<%= link_to "edit", edit_image_path(link.id) %>)<br>
+    <% end %>
+  <% end %>
 </div>
