@@ -17,3 +17,17 @@
 :root {
   font-family: Arial;
 }
+
+/* dark mode */
+body {
+  background-color: #202020;
+  color: #e0e0e0;
+}
+a {
+  color: #66fffa;
+  text-decoration: none;
+  transition: color 250ms;
+}
+a:hover {
+  color: white;
+}

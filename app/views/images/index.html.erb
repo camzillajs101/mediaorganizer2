@@ -14,7 +14,8 @@
 <%= form_with url: images_path, method: :get do |f| %>
   <%= f.label :tag_query, "Search by tag(s):" %>
   <%= f.text_field :tag_query %>
-  <%= f.select(:qtype, ['any','exact','exclude']) %><br>
+  <%= f.select(:qtype, ['any','exact','exclude']) %>
+  <%= link_to "See all tags", "/tags" %><br>
 
   <%= f.label :title_query, "Search by title:" %>
   <%= f.text_field :title_query %><br>
