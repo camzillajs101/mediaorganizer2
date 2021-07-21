@@ -1,0 +1,9 @@
+$('.page-blur, .show-image').css({
+  display: "flex"
+});
+
+$('.show-image').html('<img src="<%= @image.url %>">');
+
+$('.page-blur').click(() => {
+  $('.page-blur, .show-image').css("display","none");
+})
