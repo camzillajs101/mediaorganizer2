@@ -66,11 +66,17 @@
 .videos-container {
   display: flex;
   flex-flow: row wrap;
+  justify-content: space-around;
+  margin-bottom: 2em;
+  gap: 1em;
+
+  > * {
+    flex: 0 1 45%;
+    aspect-ratio: 16 / 9;
+    min-width: 350px;
+  }
 }
 .videos-index {
-  margin: 0 auto;
-  flex: 0 1 40%;
-  height: 400px;
   overflow-y: scroll;
 
   a {
@@ -91,10 +97,8 @@
   }
 }
 .video-player {
-  margin: 0 auto 2em;
-  height: 400px;
-  aspect-ratio: 16 / 9;
   border: 1px solid white;
+
   display: flex;
   justify-content: center;
   align-items: center;
