@@ -3,7 +3,7 @@ class ImagesController < ApplicationController
   before_action :verify_ownership, only: [:show, :edit, :update, :destroy]
 
   def index
-    @images = current_user.images.order(id: :asc)
+    @images = current_user.images.order("RANDOM()")
     @title_query = params[:title_query]
     @tag_query = params[:tag_query]
 
