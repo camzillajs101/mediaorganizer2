@@ -1,9 +1,12 @@
 $('.page-blur, .show-image').css({
   display: "flex"
 });
+$('.page-clickable').css('display','block');
 
-$('.show-image').html('<img src="<%= @image.url %>">');
+$('.show-image').html('<div class="image-view-links"><%= link_to "Edit", edit_image_path(@image) %> | <%= link_to "Show", @image %></div><img src="<%= @image.url %>">');
 
-$('.page-blur').click(() => {
-  $('.page-blur, .show-image').css("display","none");
-})
+$('.show-image').click(() => {
+  $('.page-blur, .show-image, .page-clickable').css("display","none");
+}).children().on("click", function (e) {
+    e.stopPropagation();
+});

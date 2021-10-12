@@ -1,4 +1,4 @@
-$('.video-player').html('<video src="<%= @video.url %>" controls autoplay>');
+$('.video-player').html('<div class="video-view-links"><%= link_to "Edit", edit_image_path(@video) %></div><video src="<%= @video.url %>" controls autoplay>');
 
 $('.clear-player-btn').click(() => {
   $('.video-player').html("Select a video on the left!");
