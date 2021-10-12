@@ -3,7 +3,13 @@ class ImagesController < ApplicationController
   before_action :verify_ownership, only: [:show, :edit, :update, :destroy]
 
   def index
-    @images = current_user.images.order("RANDOM()")
+    @sort = params[:sort]
+    case @sort
+    when "new"
+      @images = current_user.images.order(created_at: :desc)
+    else
+      @images = current_user.images.order("RANDOM()")
+    end
     @title_query = params[:title_query]
     @tag_query = params[:tag_query]
 
