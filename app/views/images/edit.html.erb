@@ -23,6 +23,11 @@
   </div>
 
   <div class="field">
+    <%= f.check_box :hidden %>
+    <%= f.label :hidden, "Hide" %>
+  </div>
+
+  <div class="field">
     <%= f.label :mediatype, "Media type" %><br>
     <%= f.select(:mediatype, [['image','image'],['video','video'],['link','link']]) %><br>
   </div>

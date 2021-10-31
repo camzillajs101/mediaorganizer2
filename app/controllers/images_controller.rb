@@ -3,12 +3,17 @@ class ImagesController < ApplicationController
   before_action :verify_ownership, only: [:show, :edit, :update, :destroy]
 
   def index
+    @images = current_user.images.where(hidden: false)
     @sort = params[:sort]
     case @sort
     when "new"
-      @images = current_user.images.order(created_at: :desc)
+      @images = @images.order(created_at: :desc)
+    when "favorite"
+      @images = @images.where(favorite: true)
+    when "hidden"
+      @images = current_user.images.where(hidden: true)
     else
-      @images = current_user.images.order("RANDOM()")
+      @images = @images.order("RANDOM()")
     end
     @title_query = params[:title_query]
     @tag_query = params[:tag_query]
@@ -124,7 +129,7 @@ class ImagesController < ApplicationController
 
   private
     def image_params
-      params.require(:image).permit(:title, :url, :desc, :mediatype, :favorite, :tag_list)
+      params.require(:image).permit(:title, :url, :desc, :mediatype, :favorite, :tag_list, :hidden)
     end
     def verify_ownership
       if Image.find(params[:id]).user_id != current_user.id
